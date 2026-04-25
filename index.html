@@ -554,7 +554,8 @@
     background:
       repeating-linear-gradient(0deg, transparent, transparent 30px, rgba(201,151,58,0.05) 30px, rgba(201,151,58,0.05) 31px),
       repeating-linear-gradient(90deg, transparent, transparent 30px, rgba(201,151,58,0.05) 30px, rgba(201,151,58,0.05) 31px);
-  }
+        pointer-events: none;
+    }
 
   .map-pin {
     position: relative;
@@ -563,6 +564,64 @@
   }
   .map-pin svg { width: 48px; margin-bottom: 12px; }
   .map-pin p { font-size: 0.85rem; color: var(--stone-light); letter-spacing: 0.1em; }
+
+  /* ── MAP & DIRECTIONS ── */
+  .map-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border: 1px solid var(--stone-light);
+    overflow: hidden;
+  }
+
+  .map-placeholder {
+    min-height: 280px;
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .map-actions {
+    display: flex;
+    gap: 0;
+    border-top: 1px solid var(--stone-light);
+  }
+
+  .dir-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px 12px;
+    font-family: 'Crimson Pro', serif;
+    font-size: 0.88rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-decoration: none;
+    transition: all 0.25s ease;
+    cursor: pointer;
+  }
+
+  .dir-btn svg { width: 15px; height: 15px; flex-shrink: 0; }
+
+  .dir-btn-primary {
+    background: var(--ink);
+    color: var(--gold-light);
+    border-right: 1px solid rgba(201,151,58,0.2);
+  }
+  .dir-btn-primary:hover { background: var(--red); color: #fff; }
+
+  .dir-btn-secondary {
+    background: var(--cream-dark);
+    color: var(--ink-soft);
+  }
+  .dir-btn-secondary:hover { background: var(--ink); color: var(--stone-light); }
+
+  @media (max-width: 420px) {
+    .map-actions { flex-direction: column; }
+    .dir-btn-primary { border-right: none; border-bottom: 1px solid rgba(201,151,58,0.2); }
+  }
 
   /* ── FOOTER ── */
   footer {
@@ -954,13 +1013,26 @@
         </div>
       </div>
 
-      <div class="map-placeholder reveal">
-        <div class="map-pin">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <path d="M12 21C12 21 5 14.25 5 9a7 7 0 1 1 14 0c0 5.25-7 12-7 12z"/>
-            <circle cx="12" cy="9" r="2.5"/>
-          </svg>
-          <p>Thôn Hậu Ái<br>Xã Sơn Đồng · Hà Nội</p>
+      <div class="map-wrapper reveal">
+        <div class="map-placeholder" style="padding:0">
+          <iframe
+              src="https://www.google.com/maps?q=21.0388488,105.728635&z=17&output=embed"
+              width="100%"
+              height="100%"
+              style="border:0; min-height:280px; display:block;"
+              loading="lazy"
+              allowfullscreen>
+          </iframe>
+        </div>
+        <div class="map-actions">
+          <a class="dir-btn dir-btn-primary"
+             href="https://www.google.com/maps/dir/?api=1&destination=21.0388488,105.728635&travelmode=driving"
+             target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="3 11 22 2 13 21 11 13 3 11"/>
+            </svg>
+            Chỉ đường (Google Maps)
+          </a>
         </div>
       </div>
     </div>
