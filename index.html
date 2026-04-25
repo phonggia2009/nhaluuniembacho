@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nhà Lưu Niệm Bác Hồ – Thôn Hậu Ái, Hà Nội</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #c9973a;
+    --gold-light: #e8c070;
+    --red: #8b1a1a;
+    --red-light: #b52a2a;
+    --cream: #f5f0e6;
+    --cream-dark: #ede5d0;
+    --ink: #1a1208;
+    --ink-soft: #3a2e1a;
+    --stone: #8a7a60;
+    --stone-light: #bfb49a;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-size: 18px;
+    line-height: 1.75;
+    overflow-x: hidden;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: var(--ink);
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(139,26,26,0.35) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 30%, rgba(201,151,58,0.2) 0%, transparent 55%),
+      linear-gradient(170deg, #0e0b06 0%, #1e1408 40%, #251b0c 100%);
+  }
+
+  /* Decorative rice-paper texture overlay */
+  .hero-bg::after {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(201,151,58,0.03) 3px, rgba(201,151,58,0.03) 4px),
+      repeating-linear-gradient(90deg, transparent, transparent 3px, rgba(201,151,58,0.02) 3px, rgba(201,151,58,0.02) 4px);
+    pointer-events: none;
+  }
+
+  .hero-border {
+    position: absolute; inset: 24px;
+    border: 1px solid rgba(201,151,58,0.3);
+    pointer-events: none;
+  }
+  .hero-border::before, .hero-border::after {
+    content: '';
+    position: absolute;
+    width: 40px; height: 40px;
+    border-color: var(--gold);
+    border-style: solid;
+  }
+  .hero-border::before { top: -1px; left: -1px; border-width: 2px 0 0 2px; }
+  .hero-border::after  { bottom: -1px; right: -1px; border-width: 0 2px 2px 0; }
+
+  .hero-content {
+    position: relative;
+    text-align: center;
+    padding: 60px 24px;
+    max-width: 780px;
+    animation: fadeUp 1.2s ease both;
+  }
+
+  .hero-eyebrow {
+    display: inline-block;
+    font-family: 'Crimson Pro', serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 28px;
+    padding: 6px 20px;
+    border: 1px solid rgba(201,151,58,0.4);
+  }
+
+  .hero-star {
+    display: block;
+    font-size: 2.2rem;
+    color: var(--gold);
+    margin-bottom: 16px;
+    animation: spin 20s linear infinite;
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 6vw, 4.2rem);
+    font-weight: 700;
+    color: var(--cream);
+    line-height: 1.15;
+    margin-bottom: 12px;
+    text-shadow: 0 2px 40px rgba(0,0,0,0.5);
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+
+  .hero-sub {
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    color: var(--stone-light);
+    margin-bottom: 36px;
+  }
+
+  .hero-divider {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    justify-content: center;
+    margin-bottom: 32px;
+  }
+  .hero-divider span { width: 80px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold)); }
+  .hero-divider span:last-child { transform: scaleX(-1); }
+  .hero-divider i { color: var(--gold); font-style: normal; font-size: 1.1rem; }
+
+  .hero-badges {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+  }
+  .badge {
+    background: rgba(201,151,58,0.12);
+    border: 1px solid rgba(201,151,58,0.35);
+    color: var(--gold-light);
+    font-size: 0.82rem;
+    letter-spacing: 0.08em;
+    padding: 6px 16px;
+    font-family: 'Crimson Pro', serif;
+    font-weight: 600;
+  }
+
+  .scroll-cue {
+    position: absolute;
+    bottom: 36px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: rgba(201,151,58,0.5);
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    animation: bounce 2s ease-in-out infinite;
+  }
+  .scroll-cue svg { width: 16px; opacity: 0.6; }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(8px); }
+  }
+
+  /* ── SECTIONS ── */
+  section { padding: 80px 24px; }
+
+  .container { max-width: 900px; margin: 0 auto; }
+  .container-wide { max-width: 1100px; margin: 0 auto; }
+
+  .section-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.2;
+    margin-bottom: 20px;
+  }
+
+  .ornament {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+  .ornament hr { flex: 1; border: none; border-top: 1px solid var(--stone-light); }
+  .ornament i { color: var(--gold); font-style: normal; font-size: 1rem; }
+
+  /* ── INTRO ── */
+  .intro-section {
+    background: var(--cream);
+    position: relative;
+  }
+  .intro-section::before {
+    content: '"';
+    position: absolute;
+    top: 30px; left: 16px;
+    font-family: 'Playfair Display', serif;
+    font-size: 15rem;
+    color: rgba(201,151,58,0.07);
+    line-height: 1;
+    pointer-events: none;
+    select: none;
+  }
+
+  .intro-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+  }
+
+  .intro-text p {
+    margin-bottom: 18px;
+    color: var(--ink-soft);
+    font-size: 1.05rem;
+  }
+
+  .intro-facts {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .fact-card {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 28px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+  }
+  .fact-card:hover { transform: translateY(-3px); }
+  .fact-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 4px; height: 100%;
+    background: var(--gold);
+  }
+  .fact-card .number {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .fact-card .label {
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    color: var(--stone-light);
+    text-transform: uppercase;
+  }
+
+  /* ── TIMELINE ── */
+  .timeline-section {
+    background: var(--ink);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .timeline-section::before {
+    content: '1946';
+    position: absolute;
+    right: -20px; top: 40px;
+    font-family: 'Playfair Display', serif;
+    font-size: 18rem;
+    font-weight: 700;
+    color: rgba(255,255,255,0.03);
+    pointer-events: none;
+    line-height: 1;
+  }
+
+  .timeline-section .section-title { color: var(--cream); }
+  .timeline-section .section-label { color: var(--gold-light); }
+
+  .timeline {
+    position: relative;
+    padding-left: 36px;
+    margin-top: 40px;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 6px; top: 0; bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--gold), rgba(201,151,58,0.1));
+  }
+
+  .tl-item {
+    position: relative;
+    margin-bottom: 48px;
+    animation: fadeUp 0.6s ease both;
+  }
+  .tl-item::before {
+    content: '';
+    position: absolute;
+    left: -32px; top: 7px;
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: var(--gold);
+    border: 2px solid var(--ink);
+    box-shadow: 0 0 0 3px rgba(201,151,58,0.3);
+  }
+
+  .tl-date {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 0.95rem;
+    color: var(--gold-light);
+    margin-bottom: 6px;
+    letter-spacing: 0.05em;
+  }
+
+  .tl-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--cream);
+    margin-bottom: 10px;
+  }
+
+  .tl-desc {
+    color: var(--stone-light);
+    font-size: 0.97rem;
+    line-height: 1.7;
+  }
+
+  /* ── DECREES ── */
+  .decrees-section {
+    background: var(--cream-dark);
+  }
+
+  .decree-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+    margin-top: 36px;
+  }
+
+  .decree-card {
+    background: var(--cream);
+    border-left: 3px solid var(--red);
+    padding: 20px 22px;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+  .decree-card:hover {
+    background: var(--ink);
+    border-left-color: var(--gold);
+  }
+  .decree-card:hover .decree-num { color: var(--gold); }
+  .decree-card:hover .decree-text { color: var(--stone-light); }
+
+  .decree-num {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--red);
+    margin-bottom: 6px;
+    transition: color 0.3s;
+  }
+  .decree-text {
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+    transition: color 0.3s;
+    line-height: 1.5;
+  }
+
+  /* ── ARCHITECTURE ── */
+  .arch-section {
+    background: var(--cream);
+  }
+
+  .arch-visual {
+    background: var(--ink);
+    padding: 48px;
+    position: relative;
+    overflow: hidden;
+    margin-top: 40px;
+  }
+
+  .arch-visual::before {
+    content: '';
+    position: absolute; inset: 12px;
+    border: 1px dashed rgba(201,151,58,0.2);
+    pointer-events: none;
+  }
+
+  .house-diagram {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2px;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .house-room {
+    background: rgba(201,151,58,0.1);
+    border: 1px solid rgba(201,151,58,0.3);
+    padding: 24px 12px;
+    text-align: center;
+    transition: background 0.3s;
+    cursor: default;
+  }
+  .house-room:hover { background: rgba(201,151,58,0.2); }
+
+  .house-room.main {
+    grid-column: span 2;
+    background: rgba(139,26,26,0.2);
+    border-color: rgba(201,151,58,0.5);
+  }
+
+  .house-room.full { grid-column: span 3; }
+
+  .house-room .room-label {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.9rem;
+    color: var(--gold-light);
+    margin-bottom: 4px;
+  }
+  .house-room .room-sub {
+    font-size: 0.75rem;
+    color: rgba(191,180,154,0.7);
+  }
+
+  /* ── RECOGNITION ── */
+  .recog-section {
+    background: var(--red);
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+  }
+
+  .recog-section::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(circle at 30% 50%, rgba(0,0,0,0.2) 0%, transparent 70%),
+      repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(255,255,255,0.02) 20px, rgba(255,255,255,0.02) 21px);
+  }
+
+  .recog-inner {
+    position: relative;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .recog-icon {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    display: block;
+  }
+
+  .recog-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.6rem, 4vw, 2.5rem);
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 16px;
+    line-height: 1.2;
+  }
+
+  .recog-text {
+    color: rgba(255,255,255,0.8);
+    font-size: 1rem;
+    margin-bottom: 28px;
+  }
+
+  .recog-date {
+    display: inline-block;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.25);
+    color: #fff;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-style: italic;
+    padding: 10px 28px;
+  }
+
+  /* ── VISIT ── */
+  .visit-section {
+    background: var(--cream-dark);
+  }
+
+  .visit-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-top: 40px;
+  }
+
+  .visit-info h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    color: var(--ink);
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--stone-light);
+  }
+
+  .info-row {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 12px;
+    font-size: 0.97rem;
+    color: var(--ink-soft);
+    align-items: flex-start;
+  }
+  .info-row .icon { color: var(--gold); flex-shrink: 0; margin-top: 2px; }
+
+  .map-placeholder {
+    background: var(--ink);
+    min-height: 280px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .map-placeholder::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      repeating-linear-gradient(0deg, transparent, transparent 30px, rgba(201,151,58,0.05) 30px, rgba(201,151,58,0.05) 31px),
+      repeating-linear-gradient(90deg, transparent, transparent 30px, rgba(201,151,58,0.05) 30px, rgba(201,151,58,0.05) 31px);
+  }
+
+  .map-pin {
+    position: relative;
+    text-align: center;
+    color: var(--gold);
+  }
+  .map-pin svg { width: 48px; margin-bottom: 12px; }
+  .map-pin p { font-size: 0.85rem; color: var(--stone-light); letter-spacing: 0.1em; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink);
+    padding: 48px 24px;
+    text-align: center;
+  }
+
+  footer .footer-star {
+    font-size: 1.5rem;
+    color: var(--gold);
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  footer p {
+    color: var(--stone);
+    font-size: 0.88rem;
+    letter-spacing: 0.05em;
+  }
+  footer .footer-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    color: var(--cream);
+    margin-bottom: 8px;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 14px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: all 0.4s ease;
+  }
+  nav.scrolled {
+    background: rgba(26,18,8,0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(201,151,58,0.2);
+  }
+
+  .nav-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.95rem;
+    color: var(--gold-light);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 28px;
+    list-style: none;
+  }
+  .nav-links a {
+    color: rgba(255,255,255,0.6);
+    text-decoration: none;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold-light); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    nav .nav-links { display: none; }
+    nav { padding: 12px 18px; }
+
+    section { padding: 60px 20px; }
+
+    .intro-grid { grid-template-columns: 1fr; gap: 32px; }
+    .visit-grid { grid-template-columns: 1fr; }
+    .house-diagram { grid-template-columns: 1fr 1fr; }
+    .house-room.main { grid-column: span 2; }
+    .house-room.full { grid-column: span 2; }
+    .arch-visual { padding: 28px 20px; }
+
+    .hero-border { inset: 14px; }
+
+    .timeline { padding-left: 28px; }
+    .tl-item::before { left: -25px; }
+    .timeline::before { left: 4px; }
+  }
+
+  @media (max-width: 480px) {
+    .house-diagram { grid-template-columns: 1fr; }
+    .house-room.main, .house-room.full { grid-column: span 1; }
+    .decree-grid { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a class="nav-brand" href="#">Nhà Lưu Niệm Bác Hồ</a>
+  <ul class="nav-links">
+    <li><a href="#gioi-thieu">Giới thiệu</a></li>
+    <li><a href="#su-kien">Sự kiện</a></li>
+    <li><a href="#sac-lenh">Sắc lệnh</a></li>
+    <li><a href="#tham-quan">Tham quan</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-border"></div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">Di Tích Lịch Sử Quốc Gia</div>
+    <span class="hero-star">✦</span>
+    <h1>Nhà Lưu Niệm<br><em>Bác Hồ</em></h1>
+    <p class="hero-sub">Thôn Hậu Ái · Xã Sơn Đồng · Thành phố Hà Nội</p>
+
+    <div class="hero-divider">
+      <span></span>
+      <i>❧</i>
+      <span></span>
+    </div>
+
+    <div class="hero-badges">
+      <span class="badge">Xếp hạng 14/4/2003</span>
+      <span class="badge">Khánh thành 19/5/1990</span>
+      <span class="badge">Hơn 1000m² khuôn viên</span>
+    </div>
+  </div>
+
+  <div class="scroll-cue">
+    <span>Khám phá</span>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <path d="M12 5v14M5 12l7 7 7-7"/>
+    </svg>
+  </div>
+</section>
+
+<!-- INTRO -->
+<section class="intro-section" id="gioi-thieu">
+  <div class="container">
+    <div class="section-label reveal">Di Tích Lưu Niệm</div>
+    <h2 class="section-title reveal">Nơi ghi dấu<br>những tháng ngày lịch sử</h2>
+    <div class="ornament reveal"><hr><i>✦</i><hr></div>
+
+    <div class="intro-grid">
+      <div class="intro-text reveal">
+        <p>Nhà lưu niệm Bác Hồ tại thôn Hậu Ái là nơi đã vinh dự được đón Chủ tịch Hồ Chí Minh cùng các đồng chí trong Ban chấp hành Trung ương Đảng về ở và làm việc <strong>2 lần</strong> trong năm 1946.</p>
+        <p>Khu nhà nguyên thuộc sở hữu của cụ <strong>Nguyễn Thông Phúc</strong> (tức cụ Ký Cóc), chi trưởng dòng họ Nguyễn Phan ở thôn Hậu Ái. Gia đình cụ đã nhường toàn bộ ngôi nhà chính để phục vụ Bác Hồ và Lãnh đạo Trung ương Đảng ở và làm việc.</p>
+        <p>Nằm trên vành đai nông thôn, cửa ngõ phía Tây Thủ đô Hà Nội, chỉ cách trung tâm hơn 10km — đây từng là vùng <em>ATK</em> (an toàn khu) của Xứ ủy Bắc Kỳ, một vị trí chiến lược quan trọng trong cuộc kháng chiến.</p>
+        <p>Năm 1947, thực dân Pháp đốt phá ngôi nhà. Đến năm 1990, khu nhà được phục chế nguyên trạng và khánh thành đúng dịp kỷ niệm 100 năm ngày sinh Chủ tịch Hồ Chí Minh.</p>
+      </div>
+
+      <div class="intro-facts reveal">
+        <div class="fact-card">
+          <div class="number">2</div>
+          <div class="label">Lần Bác Hồ về ở và làm việc</div>
+        </div>
+        <div class="fact-card">
+          <div class="number">9</div>
+          <div class="label">Sắc lệnh được ký tại đây (1946)</div>
+        </div>
+        <div class="fact-card">
+          <div class="number">1000+</div>
+          <div class="label">m² diện tích khuôn viên</div>
+        </div>
+        <div class="fact-card">
+          <div class="number">6</div>
+          <div class="label">Ngày 7 đêm Bác lưu trú lần 2</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section class="timeline-section" id="su-kien">
+  <div class="container">
+    <div class="section-label reveal">Dòng Thời Gian</div>
+    <h2 class="section-title reveal">Những mốc lịch sử<br>không thể quên</h2>
+    <div class="ornament reveal">
+      <hr style="border-color:rgba(201,151,58,0.3)">
+      <i style="color:var(--gold)">✦</i>
+      <hr style="border-color:rgba(201,151,58,0.3)">
+    </div>
+
+    <div class="timeline">
+      <div class="tl-item reveal">
+        <div class="tl-date">03 – 05 tháng 3, 1946</div>
+        <div class="tl-title">Hội nghị mở rộng BCH Trung ương Đảng</div>
+        <div class="tl-desc">Chủ tịch Hồ Chí Minh chủ trì hội nghị thông qua chủ trương <em>"Hòa để tiến"</em> — tạm hòa hoãn với Pháp để đuổi quân Tưởng về nước, tránh đất nước phải đối phó hai kẻ thù cùng lúc.</div>
+      </div>
+
+      <div class="tl-item reveal">
+        <div class="tl-date">06 tháng 3, 1946</div>
+        <div class="tl-title">Ký Hiệp định Sơ bộ</div>
+        <div class="tl-desc">Sau hội nghị tại Hậu Ái, Chủ tịch Hồ Chí Minh trở ra Hà Nội để ký Hiệp định Sơ bộ với chính quyền thực dân Pháp, mở ra giai đoạn đàm phán quan trọng.</div>
+      </div>
+
+      <div class="tl-item reveal">
+        <div class="tl-date">26 tháng 11 – 03 tháng 12, 1946</div>
+        <div class="tl-title">Lần thứ 2 — 6 ngày 7 đêm lịch sử</div>
+        <div class="tl-desc">Khoảng 19h30 ngày 26/11, Bác Hồ cùng đồng chí Nguyễn Lương Bằng và Vũ Kỳ bí mật đến Hậu Ái theo đường đồng. Tại đây Người đã ký 9 sắc lệnh và viết Lời kêu gọi thành lập tổ chức "Nghĩa thương" chuẩn bị kháng chiến.</div>
+      </div>
+
+      <div class="tl-item reveal">
+        <div class="tl-date">19 tháng 12, 1946</div>
+        <div class="tl-title">Mệnh lệnh Kháng chiến</div>
+        <div class="tl-desc">Tiếng súng kháng chiến nổ ra ở Hà Nội. Ngay đêm đó, các đồng chí Trường Chinh, Lê Đức Thọ, Võ Nguyên Giáp về Hậu Ái viết bản <em>"Mệnh lệnh kháng chiến"</em> — được hai tự vệ Vân Canh chuyển tới Đài Tiếng nói Việt Nam phát sóng toàn quốc.</div>
+      </div>
+
+      <div class="tl-item reveal">
+        <div class="tl-date">1947</div>
+        <div class="tl-title">Thực dân Pháp đốt phá</div>
+        <div class="tl-desc">Thực dân Pháp ra lệnh đốt phá khu nhà. Ngôi nhà của cụ Nguyễn Thông Phúc bị tàn phá, chỉ còn lại nền nhà và sân gạch.</div>
+      </div>
+
+      <div class="tl-item reveal">
+        <div class="tl-date">19 tháng 5, 1990</div>
+        <div class="tl-title">Khánh thành và mở cửa tham quan</div>
+        <div class="tl-desc">Được phục chế nguyên trạng, công trình khánh thành đúng dịp kỷ niệm 100 năm ngày sinh Chủ tịch Hồ Chí Minh. Gian gác được bài trí như khi Bác về ở và làm việc.</div>
+      </div>
+
+      <div class="tl-item reveal">
+        <div class="tl-date">14 tháng 4, 2003</div>
+        <div class="tl-title">Di tích Lịch sử cấp Quốc gia</div>
+        <div class="tl-desc">Được xếp hạng <strong>Di tích lưu niệm danh nhân cấp Quốc gia</strong> theo Quyết định số 15/2003/QĐ-BVHTT của Bộ trưởng Bộ Văn hoá Thông tin.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DECREES -->
+<section class="decrees-section" id="sac-lenh">
+  <div class="container-wide">
+    <div class="section-label reveal">Di Sản Pháp Lý</div>
+    <h2 class="section-title reveal">9 Sắc lệnh được ký<br>tại Hậu Ái (1946)</h2>
+    <div class="ornament reveal"><hr><i>✦</i><hr></div>
+
+    <div class="decree-grid">
+      <div class="decree-card reveal">
+        <div class="decree-num">Sắc lệnh 220/SL</div>
+        <div class="decree-text">Về tổ chức của Bộ Kinh tế</div>
+      </div>
+      <div class="decree-card reveal">
+        <div class="decree-num">Sắc lệnh 221/SL</div>
+        <div class="decree-text">Cử ông Đào Hữu Dương giữ chức Đổng lý sự vụ Bộ Cứu tế xã hội</div>
+      </div>
+      <div class="decree-card reveal">
+        <div class="decree-num">Sắc lệnh 223/SL</div>
+        <div class="decree-text">Ấn định hình phạt về tội đưa và nhận hối lộ</div>
+      </div>
+      <div class="decree-card reveal">
+        <div class="decree-num">Sắc lệnh 224/SL</div>
+        <div class="decree-text">Đổi tên Nha sở Thông tin Tuyên truyền thành Nha sở Thông tin</div>
+      </div>
+      <div class="decree-card reveal">
+        <div class="decree-num">Sắc lệnh 225/SL</div>
+        <div class="decree-text">Cử nhân viên giữ các chức vụ trong Bộ Giáo dục</div>
+      </div>
+      <div class="decree-card reveal">
+        <div class="decree-num">Sắc lệnh 226/SL</div>
+        <div class="decree-text">Về tổ chức Bộ Lao động</div>
+      </div>
+      <div class="decree-card reveal">
+        <div class="decree-num">Sắc lệnh 227/SL</div>
+        <div class="decree-text">Ấn định thể lệ báo cáo pháp định</div>
+      </div>
+      <div class="decree-card reveal">
+        <div class="decree-num">Sắc lệnh 229/SL</div>
+        <div class="decree-text">Đặt tất cả các cơ quan quân sự dưới quyền của Bộ Quốc phòng</div>
+      </div>
+      <div class="decree-card reveal" style="border-left-color: var(--gold); background: rgba(201,151,58,0.05);">
+        <div class="decree-num" style="color: var(--gold)">Sắc lệnh 230/SL</div>
+        <div class="decree-text">Ủy quyền Tổng chỉ huy Quân đội toàn quốc cho đồng chí <strong>Võ Nguyên Giáp</strong></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ARCHITECTURE -->
+<section class="arch-section">
+  <div class="container">
+    <div class="section-label reveal">Kiến Trúc</div>
+    <h2 class="section-title reveal">Khuôn viên<br>hơn 1.000 m²</h2>
+    <div class="ornament reveal"><hr><i>✦</i><hr></div>
+
+    <div class="arch-visual reveal">
+      <div class="house-diagram">
+        <div class="house-room main">
+          <div class="room-label">🏠 Nhà chính 2 tầng</div>
+          <div class="room-sub">Tầng dưới 3 gian · Tầng trên 1 gian<br>Nơi Bác Hồ ở và làm việc</div>
+        </div>
+        <div class="house-room">
+          <div class="room-label">⛩ Nhà thờ</div>
+          <div class="room-sub">Nhà ngói 3 gian<br>Nhà thờ họ Nguyễn Phan</div>
+        </div>
+        <div class="house-room full" style="background:rgba(201,151,58,0.06)">
+          <div class="room-label">🔥 Nhà ngang · Khu bếp</div>
+          <div class="room-sub">Cụ bà Thông Phúc nấu ăn phục vụ Bác</div>
+        </div>
+        <div class="house-room" style="background:rgba(139,26,26,0.1)">
+          <div class="room-label">🚪 Cổng chính</div>
+          <div class="room-sub">Ra sân đình Hậu Ái</div>
+        </div>
+        <div class="house-room" style="background:rgba(139,26,26,0.1)">
+          <div class="room-label">🌿 Cổng phụ</div>
+          <div class="room-sub">Ra cánh đồng Trầm — lối thoát hiểm</div>
+        </div>
+        <div class="house-room">
+          <div class="room-label">🌾 Vườn ao</div>
+          <div class="room-sub">Um tùm, kín đáo</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RECOGNITION -->
+<section class="recog-section">
+  <div class="recog-inner">
+    <span class="recog-icon">🏅</span>
+    <h2 class="recog-title reveal">Di tích Lưu niệm Danh nhân<br>cấp Quốc gia</h2>
+    <p class="recog-text reveal">Được xếp hạng theo Quyết định số 15/2003/QĐ-BVHTT của Bộ trưởng Bộ Văn hoá Thông tin (nay là Bộ Văn hoá, Thể thao và Du lịch).</p>
+    <div class="recog-date reveal">Ngày 14 tháng 4 năm 2003</div>
+  </div>
+</section>
+
+<!-- VISIT -->
+<section class="visit-section" id="tham-quan">
+  <div class="container">
+    <div class="section-label reveal">Thông Tin Tham Quan</div>
+    <h2 class="section-title reveal">Ghé thăm di tích</h2>
+    <div class="ornament reveal"><hr><i>✦</i><hr></div>
+
+    <div class="visit-grid">
+      <div class="visit-info reveal">
+        <h3>📍 Địa chỉ</h3>
+        <div class="info-row">
+          <span class="icon">▸</span>
+          <span>Thôn Hậu Ái, xã Sơn Đồng, thành phố Hà Nội<br><em style="font-size:0.88rem;color:var(--stone)">(Trước ngày 1/7/2025 thuộc xã Vân Canh, huyện Hoài Đức)</em></span>
+        </div>
+        <div class="info-row">
+          <span class="icon">▸</span>
+          <span>Cách trung tâm Hà Nội khoảng 10km về phía Tây</span>
+        </div>
+
+        <h3 style="margin-top:28px">🚗 Lộ trình tham khảo</h3>
+        <div class="info-row">
+          <span class="icon">▸</span>
+          <span>Từ Hà Nội → Quốc lộ 32 → Ngã tư Canh → Thôn Hậu Ái</span>
+        </div>
+        <div class="info-row">
+          <span class="icon">▸</span>
+          <span>Cũng có thể đi theo Tỉnh lộ 70</span>
+        </div>
+
+        <h3 style="margin-top:28px">ℹ️ Thông tin thêm</h3>
+        <div class="info-row">
+          <span class="icon">▸</span>
+          <span>Tầng trên: Bài trí nguyên trạng như khi Bác về ở và làm việc</span>
+        </div>
+        <div class="info-row">
+          <span class="icon">▸</span>
+          <span>Tầng dưới: Không gian tưởng niệm Chủ tịch Hồ Chí Minh</span>
+        </div>
+        <div class="info-row">
+          <span class="icon">▸</span>
+          <span>Khánh thành ngày 19/5/1990 — dịp 100 năm ngày sinh Bác Hồ</span>
+        </div>
+      </div>
+
+      <div class="map-placeholder reveal">
+        <div class="map-pin">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M12 21C12 21 5 14.25 5 9a7 7 0 1 1 14 0c0 5.25-7 12-7 12z"/>
+            <circle cx="12" cy="9" r="2.5"/>
+          </svg>
+          <p>Thôn Hậu Ái<br>Xã Sơn Đồng · Hà Nội</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-star">✦</span>
+  <p class="footer-title">Nhà Lưu Niệm Bác Hồ</p>
+  <p>Thôn Hậu Ái · Xã Sơn Đồng · Thành phố Hà Nội</p>
+  <p style="margin-top:8px; color:rgba(138,122,96,0.6); font-size:0.78rem; letter-spacing:0.15em">
+    DI TÍCH LỊCH SỬ QUỐC GIA · XẾP HẠNG 14/4/2003
+  </p>
+</footer>
+
+<script>
+  // Navbar scroll effect
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Reveal on scroll
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  reveals.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
