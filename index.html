@@ -6,6 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Nhà Lưu Niệm Bác Hồ – Thôn Hậu Ái, Hà Nội</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
 <style>
   :root {
     --gold: #c9973a;
@@ -539,51 +540,23 @@
   }
   .info-row .icon { color: var(--gold); flex-shrink: 0; margin-top: 2px; }
 
-  .map-placeholder {
-    background: var(--ink);
-    min-height: 280px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    overflow: hidden;
-  }
-  .map-placeholder::before {
-    content: '';
-    position: absolute; inset: 0;
-    background:
-      repeating-linear-gradient(0deg, transparent, transparent 30px, rgba(201,151,58,0.05) 30px, rgba(201,151,58,0.05) 31px),
-      repeating-linear-gradient(90deg, transparent, transparent 30px, rgba(201,151,58,0.05) 30px, rgba(201,151,58,0.05) 31px);
-        pointer-events: none;
-    }
-
-  .map-pin {
-    position: relative;
-    text-align: center;
-    color: var(--gold);
-  }
-  .map-pin svg { width: 48px; margin-bottom: 12px; }
-  .map-pin p { font-size: 0.85rem; color: var(--stone-light); letter-spacing: 0.1em; }
-
   /* ── MAP & DIRECTIONS ── */
   .map-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
     border: 1px solid var(--stone-light);
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
   }
 
-  .map-placeholder {
-    min-height: 280px;
-    flex: 1;
-    position: relative;
-    overflow: hidden;
+  #leaflet-map {
+    width: 100%;
+    height: 320px;
+    z-index: 1;
+    background: var(--ink);
   }
 
   .map-actions {
     display: flex;
-    gap: 0;
     border-top: 1px solid var(--stone-light);
   }
 
@@ -593,22 +566,20 @@
     align-items: center;
     justify-content: center;
     gap: 8px;
-    padding: 14px 12px;
+    padding: 14px 10px;
     font-family: 'Crimson Pro', serif;
     font-size: 0.88rem;
     font-weight: 600;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.05em;
     text-decoration: none;
     transition: all 0.25s ease;
-    cursor: pointer;
   }
-
   .dir-btn svg { width: 15px; height: 15px; flex-shrink: 0; }
 
   .dir-btn-primary {
     background: var(--ink);
     color: var(--gold-light);
-    border-right: 1px solid rgba(201,151,58,0.2);
+    border-right: 1px solid rgba(201,151,58,0.25);
   }
   .dir-btn-primary:hover { background: var(--red); color: #fff; }
 
@@ -617,6 +588,25 @@
     color: var(--ink-soft);
   }
   .dir-btn-secondary:hover { background: var(--ink); color: var(--stone-light); }
+
+  .dir-btn-waze {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px;
+    background: #05c8f0;
+    color: #fff;
+    font-family: 'Crimson Pro', serif;
+    font-size: 0.88rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-decoration: none;
+    border-top: 1px solid rgba(255,255,255,0.15);
+    transition: background 0.25s;
+  }
+  .dir-btn-waze svg { width: 16px; height: 16px; }
+  .dir-btn-waze:hover { background: #03a8cc; }
 
   @media (max-width: 420px) {
     .map-actions { flex-direction: column; }
@@ -1014,27 +1004,14 @@
       </div>
 
       <div class="map-wrapper reveal">
-        <div class="map-placeholder" style="padding:0">
-          <iframe
-              src="https://www.google.com/maps?q=21.0388488,105.728635&z=17&output=embed"
-              width="100%"
-              height="100%"
-              style="border:0; min-height:280px; display:block;"
-              loading="lazy"
-              allowfullscreen>
-          </iframe>
-        </div>
+        <div id="leaflet-map"></div>
         <div class="map-actions">
           <a class="dir-btn dir-btn-primary"
              href="https://www.google.com/maps/dir/?api=1&destination=21.0388488,105.728635&travelmode=driving"
              target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <polygon points="3 11 22 2 13 21 11 13 3 11"/>
-            </svg>
-            Chỉ đường (Google Maps)
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+            Chỉ đường – Google Maps
           </a>
-        </div>
-      </div>
     </div>
   </div>
 </section>
@@ -1049,6 +1026,7 @@
   </p>
 </footer>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script>
   // Navbar scroll effect
   const navbar = document.getElementById('navbar');
@@ -1066,8 +1044,56 @@
       }
     });
   }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-
   reveals.forEach(el => observer.observe(el));
+
+  // Leaflet map — không dùng iframe, không bị Zalo/webview chặn
+  const LAT = 21.0388488, LNG = 105.728635;
+
+  const map = L.map('leaflet-map', {
+    center: [LAT, LNG],
+    zoom: 17,
+    zoomControl: true,
+    scrollWheelZoom: false,   // tắt scroll zoom để không conflict khi cuộn trang
+    attributionControl: true
+  });
+
+  // Tile layer OpenStreetMap (miễn phí, không cần API key)
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+  }).addTo(map);
+
+  // Custom marker icon màu đỏ phù hợp giao diện
+  const icon = L.divIcon({
+    className: '',
+    html: `<div style="
+      width:36px;height:44px;
+      display:flex;align-items:center;justify-content:center;
+      filter:drop-shadow(0 3px 6px rgba(0,0,0,0.4));
+    ">
+      <svg viewBox="0 0 24 32" xmlns="http://www.w3.org/2000/svg" width="36" height="44">
+        <path d="M12 0C7.58 0 4 3.58 4 8c0 5.5 8 16 8 16s8-10.5 8-16c0-4.42-3.58-8-8-8z" fill="#8b1a1a"/>
+        <circle cx="12" cy="8" r="3.5" fill="#fff" opacity="0.9"/>
+      </svg>
+    </div>`,
+    iconSize: [36, 44],
+    iconAnchor: [18, 44],
+    popupAnchor: [0, -46]
+  });
+
+  const marker = L.marker([LAT, LNG], { icon }).addTo(map);
+
+  marker.bindPopup(`
+    <div style="font-family:'Crimson Pro',serif;min-width:180px;padding:4px 2px">
+      <strong style="font-size:1rem;color:#8b1a1a">Nhà Lưu Niệm Bác Hồ</strong><br>
+      <span style="font-size:0.85rem;color:#555">Thôn Hậu Ái, Xã Sơn Đồng<br>Thành phố Hà Nội</span><br>
+      <a href="https://www.google.com/maps/dir/?api=1&destination=${LAT},${LNG}"
+         target="_blank"
+         style="display:inline-block;margin-top:8px;font-size:0.8rem;color:#8b1a1a;font-weight:600">
+        → Chỉ đường
+      </a>
+    </div>
+  `, { maxWidth: 220 }).openPopup();
 </script>
 
 </body>
